@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e8105f">
+<title>Survei Mitra LPK/SO – JP Smart SIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#e8105f;--pd:#b3003f;--y:#ffef0a;--m:#5b0a2a;--ink:#2a1020;--ln:#f1d5de;--soft:#fff1f6}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.5 Poppins,'Noto Sans JP',system-ui,sans-serif;color:var(--ink);min-height:100dvh;padding-bottom:104px;
+background:radial-gradient(circle at 85% 8%,#ff6aa5 0,#ff6aa500 40%),linear-gradient(160deg,#ff1f78,#e0105f 45%,#a8003f) fixed}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+.logos{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.logos .ex{background:#fff;border-radius:10px;padding:6px 10px;display:flex}
+.logos .ex img{height:26px}.logos .jp{height:30px}
+.logos i{width:1px;height:30px;background:#fff9}
+.hero{color:#fff}
+h1{font-size:clamp(25px,7.4vw,33px);line-height:1.2;font-weight:800}
+mark{background:var(--y);color:var(--m);padding:0 .22em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero p{margin-top:12px;font-size:13.5px;opacity:.96}
+.trust{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 16px 6px 8px;border-radius:99px;background:linear-gradient(90deg,#17102f,#3b1450);color:#fff;font-size:12.5px;font-weight:600}
+.trust b{color:var(--y);font-size:15px}
+.card{background:#fff;border-radius:22px;margin-top:20px;padding:18px 16px 8px;box-shadow:0 24px 50px -22px #5b0a2aaa}
+.tabs{display:flex;gap:6px}
+.tb{flex:1;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#b9a0aa;transition:.3s}
+.tb b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#f6e6ec;font-size:12px;transition:.3s;flex:none}
+.tb.on{color:var(--pd)}.tb.on b{background:var(--p);color:#fff;transform:scale(1.12)}
+.tb.done b{background:#16a34a;color:#fff}.tb.done{color:#16a34a}
+.bar{height:6px;border-radius:9px;background:#fde3ec;margin:12px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff2d7a,#ffb300);border-radius:9px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.meta{display:flex;justify-content:space-between;font-size:11.5px;color:#a38592;margin-bottom:14px}
+.pane.inR{animation:inR .45s cubic-bezier(.2,.8,.2,1)}.pane.inL{animation:inL .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes inR{from{opacity:0;transform:translateX(46px)}}@keyframes inL{from{opacity:0;transform:translateX(-46px)}}
+.q{margin-bottom:20px;animation:up .5s both;animation-delay:calc(var(--i)*60ms)}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.l{display:block;font-weight:600;font-size:14px;margin-bottom:8px}.req::after{content:' *';color:var(--p)}
+input[type=text],input[type=tel],input[type=email],textarea{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:2px solid var(--ln);border-radius:12px;outline:0;background:#fff;color:var(--ink);transition:.2s}
+textarea{resize:vertical}
+input:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 4px #e8105f1f}
+.hint{font-size:11.5px;color:#a38592;margin-top:5px}
+.msg{display:none;color:#d4002f;font-size:12px;margin-top:6px;font-weight:600}
+.err .msg{display:block;animation:up .3s}.err input[type=text],.err input[type=tel],.err input[type=email],.err textarea{border-color:#d4002f}
+.err .opt{border-color:#f5b3c2}
+.opt{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;border:2px solid var(--ln);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.2s;-webkit-tap-highlight-color:transparent}
+.opt:active{transform:scale(.985)}.opt input{display:none}
+.bx{width:20px;height:20px;border:2px solid #d9a9b9;border-radius:50%;flex:none;margin-top:2px;display:grid;place-items:center;transition:.2s}
+.chk .bx{border-radius:6px}
+.opt.on{border-color:var(--p);background:var(--soft)}.opt.on .bx{background:var(--p);border-color:var(--p)}
+.bx::after{content:'';width:8px;height:8px;border-radius:50%;background:#fff;transform:scale(0);transition:.2s}
+.chk .bx::after{width:5px;height:10px;border-radius:0;background:none;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);margin-top:-2px}
+.opt.on .bx::after{transform:scale(1)}.chk.on .bx::after{transform:rotate(45deg) scale(1)}
+.opt b{font-weight:600;font-size:14px;display:block}.opt small{display:block;font-size:12px;color:#8a7380}
+.sub{display:none;margin:0 0 12px 10px;padding-left:12px;border-left:3px solid var(--y)}
+.sub.show{display:block;animation:up .35s}
+.sub .l{font-size:13px}
+.sg{position:relative}
+.sg ul{display:none;position:absolute;left:0;right:0;top:100%;margin-top:4px;max-height:230px;overflow:auto;list-style:none;padding:4px;background:#fff;border-radius:12px;box-shadow:0 14px 34px -8px #5b0a2a55;z-index:30}
+.sg li{padding:10px 12px;border-radius:8px;font-size:14px}.sg li:hover,.sg li:active{background:var(--soft)}
+.saved{font-size:11.5px;color:#16a34a;text-align:center;padding:2px 0 12px;opacity:0;transition:.4s}.saved.on{opacity:1}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fffffff0;backdrop-filter:blur(10px);box-shadow:0 -10px 30px -12px #5b0a2a66;padding:14px 16px calc(70px + env(safe-area-inset-bottom))}
+.nav div{max-width:560px;margin:0 auto;display:flex;gap:10px}
+.btn{flex:1;border:0;border-radius:14px;padding:14px;font:700 15px Poppins,sans-serif;cursor:pointer;transition:.2s}
+.btn:active{transform:scale(.97)}
+.pri{background:linear-gradient(90deg,#ff2d7a,#d1004f);color:#fff;box-shadow:0 8px 18px -8px #e8105f}
+.sec{background:#fde3ec;color:var(--pd)}.sec[hidden]{display:none}
+.shake{animation:sk .4s}@keyframes sk{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.ov{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:#3a0620d9;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:.35s}
+.ov.show{opacity:1;pointer-events:auto}
+.ld .box{text-align:center;color:#fff}
+.ring{position:relative;width:132px;height:132px;margin:0 auto 16px}
+.ring svg{width:100%;height:100%;overflow:visible}
+.ring .sp{transform-origin:60px 60px;animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring .pc{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:28px}
+.ld p{font-size:14px;font-weight:600}
+.modal{background:#fff;border-radius:24px;padding:28px 22px 22px;max-width:420px;width:100%;text-align:center;transform:translateY(30px) scale(.94);transition:.45s cubic-bezier(.2,1.2,.3,1)}
+.ov.show .modal{transform:none}
+.ok{width:76px;height:76px;margin:0 auto 14px}
+.ok circle{fill:none;stroke:#16a34a;stroke-width:4;stroke-dasharray:176;stroke-dashoffset:176}
+.ok path{fill:none;stroke:#16a34a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.show .ok circle{animation:dr .6s .2s forwards}.show .ok path{animation:dr .4s .7s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.modal h2{font-size:21px;font-weight:800;color:var(--pd)}
+.modal p{font-size:13.5px;margin-top:8px}
+.modal hr{border:0;border-top:2px dashed var(--ln);margin:16px 0}
+.jp-t{font-family:'Noto Sans JP',sans-serif}.jp-t h2{font-size:18px;color:var(--ink)}
+.modal .btn{width:100%;margin-top:18px}
+.toast{position:fixed;top:14px;left:50%;z-index:120;transform:translate(-50%,-90px);background:#2a1020;color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;max-width:92vw;transition:.4s;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header class="hero">
+  <div class="logos">
+   <span class="ex"><img src="EXATAGROUP.png" alt="Exata Group"></span><i></i>
+   <img class="jp" src="logo_jps.png" alt="JP Smart SIM">
+  </div>
+  <h1><mark>Survei Mitra LPK/SO</mark> JP Smart SIM</h1>
+  <p>Kepada Bapak/Ibu Pimpinan/Staff LPK SO. Survei ini bertujuan untuk mempererat kerja sama, menyelaraskan informasi jadwal keberangkatan siswa, serta mengoptimalkan layanan pendukung bagi para pejuang devisa ke Jepang. Mohon kesediaannya untuk mengisi data di bawah ini. Terima kasih atas kerja samanya!</p>
+  <div class="trust">
+   <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z" fill="#ffd54a"/><path d="m8 12 3 3 5-6" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   <span>Telah dipercaya <b>84+ LPK/SO</b> di seluruh Indonesia</span>
+  </div>
+ </header>
+ <main class="card">
+  <div class="tabs" id="tabs"></div>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="meta"><span id="stl"></span><span id="stp"></span></div>
+  <form id="form" class="pane" novalidate autocomplete="off"></form>
+  <div class="saved" id="saved">✓ Tersimpan otomatis di perangkat ini</div>
+ </main>
+</div>
+<div class="nav"><div>
+ <button class="btn sec" id="prev" type="button">Sebelumnya</button>
+ <button class="btn pri" id="next" type="button">Selanjutnya</button>
+</div></div>
+
+<div class="ov ld show" id="ld"><div class="box">
+ <div class="ring">
+  <svg viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffef0a"/><stop offset="1" stop-color="#ff2d7a"/></linearGradient></defs>
+   <circle cx="60" cy="60" r="52" fill="none" stroke="#ffffff30" stroke-width="8"/>
+   <circle id="rg" cx="60" cy="60" r="52" fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 60 60)" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+   <g class="sp"><circle cx="60" cy="60" r="60" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="14 363" stroke-linecap="round"/></g>
+  </svg>
+  <div class="pc" id="pc">0%</div>
+ </div>
+ <p id="lt">Menyiapkan formulir…</p>
+</div></div>
+
+<div class="ov" id="thx"><div class="modal">
+ <svg class="ok" viewBox="0 0 76 76"><circle cx="38" cy="38" r="28"/><path d="M26 39l9 9 16-18"/></svg>
+ <h2>Terima kasih!</h2>
+ <p>Survei Anda sudah kami terima. Data ini membantu kami menyelaraskan jadwal keberangkatan dan layanan komunikasi bagi siswa/i Anda. Kami akan menghubungi Bapak/Ibu bila diperlukan.</p>
+ <hr>
+ <div class="jp-t"><h2>ご協力ありがとうございました</h2>
+ <p>アンケートの回答を受け付けました。留学生の皆さまが日本で安心して通信できるよう、今後ともどうぞよろしくお願いいたします。</p></div>
+ <button class="btn pri" id="done" type="button">Selesai / 閉じる</button>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== KONFIGURASI ======
+const API='https://script.google.com/macros/s/AKfycby7Ppj_ICrHZmzcYNEpGvH18PkXvJWhLYJbn6CfPFkh5z8CXvMmL3O8pB0XFlRvH8Gb/exec';
+const XLSX_FILE='Direktori_LPK_dan_SO_Indonesia.xlsx';
+const KEY='jps_survey_mitra_v1', OTH='Lainnya';
+
+const S=[
+{t:'Info LPK',f:[
+ {k:'lpk',l:'Nama LPK',ty:'sg',ph:'Ketik nama LPK…',req:1,h:'Pilih dari saran, atau ketik sendiri bila belum ada di daftar.'},
+ {k:'pic',l:'Nama penanggung jawab / pengisi survei',ty:'text',ph:'Nama lengkap',req:1},
+ {k:'wa',l:'Nomor WhatsApp pengisi survei',ty:'tel',ph:'08xxxxxxxxxx',req:1},
+ {k:'email',l:'Email aktif LPK / pengisi survei',ty:'email',ph:'nama@lpk.co.id',req:1},
+ {k:'total25',l:'Total siswa/i LPK yang diberangkatkan tahun lalu (2025)',ty:'num',ph:'Contoh: 120',req:1},
+ {k:'bulan26',l:'Jumlah siswa/i yang diberangkatkan per bulan sepanjang 2026',ty:'area',ph:'Contoh: Jan: 5; Feb: 3; Mar: 8; Apr: 0 …',req:1,h:'Tulis per bulan, pisahkan dengan titik koma.'},
+ {k:'program',l:'Program apa yang menjadi fokus utama LPK saat ini?',ty:'chk',req:1,oth:1,o:[['Magang Kenshusei / Jisshuusei'],['Tokutei Ginou / TG']]}
+]},
+{t:'Siswa LPK',f:[
+ {k:'jalur',l:'Apakah semua siswa diberangkatkan melalui LPK sendiri, atau ada yang disalurkan / bekerja sama dengan LPK lain?',ty:'rad',req:1,oth:1,
+  o:[['Semua siswa diberangkatkan melalui LPK sendiri'],['Ada yang disalurkan / bekerja sama dengan LPK lain']],
+  sub:{when:'Ada yang disalurkan / bekerja sama dengan LPK lain',k:'jalurLpk',l:'Disalurkan melalui LPK (boleh dikosongkan):',ty:'sg',ph:'Ketik nama LPK…'}},
+ {k:'hp',l:'Bagaimana ketentuan hari & jam pegang HP / komunikasi untuk siswa/i selama masa pelatihan di LPK?',ty:'rad',req:1,oth:1,
+  o:[['Setiap hari','Tidak ada pembatasan waktu khusus penggunaan HP'],['Hanya di luar jam pelatihan / malam hari','Setelah jam 17.00 / 18.00 hingga malam saja'],['Hanya weekend','Khusus hari Sabtu dan Minggu'],['HP dikumpulkan selama jam asrama/pelatihan','Hanya dibagikan pada jadwal tertentu']]},
+ {k:'pulang',l:'Apakah siswa/siswi sebelum berangkat ke Jepang biasanya dipulangkan ke rumah terlebih dahulu?',ty:'rad',req:1,o:[['Ya'],['Tidak']],
+  sub:{when:'Ya',k:'durasi',l:'Berapa lama durasinya?',ty:'text',ph:'Contoh: 2 minggu',req:1}},
+ {k:'komun',l:'Ketika siswa akan berangkat ke Jepang, layanan komunikasi apa yang biasanya disarankan atau difasilitasi oleh LPK?',ty:'rad',req:1,oth:1,
+  o:[['WiFi Portable'],['Layanan Roaming Operator Indonesia'],['SIM Card Jepang'],['Bebas / pilihan masing-masing siswa']]},
+ {k:'biaya',l:'Rata-rata sistem pembiayaan apa yang digunakan oleh siswa/i di LPK Bapak/Ibu?',ty:'rad',req:1,oth:1,
+  o:[['Dana Talang / Lembaga Keuangan'],['Cash / Mandiri / Pribadi']]},
+ {k:'kontak',l:'Jika kami ingin menanyakan update jadwal keberangkatan siswa, kepada siapa/divisi mana yang dapat kami hubungi?',ty:'text',ph:'Nama & No. Kontak',req:1,h:'Contoh: Budi (Divisi Admin) – 0812xxxxxxx'}
+]},
+{t:'Tambahan',f:[
+ {k:'brosur',l:'Apakah memungkinkan jika kami mengirimkan brosur informasi fisik ke LPK Bapak/Ibu?',ty:'rad',req:1,oth:1,o:[['Ya, sangat memungkinkan'],['Tidak memungkinkan']]},
+ {k:'poster',l:'Apakah memungkinkan jika kami memasang poster informasi ukuran A3 di mading / papan pengumuman LPK?',ty:'rad',req:1,oth:1,o:[['Ya, sangat memungkinkan'],['Tidak memungkinkan']]}
+]}];
+
+const $=id=>document.getElementById(id), sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let D={}, step=0, L=[], busy=0;
+
+// ====== LOADER (lingkaran + persentase) ======
+const C=2*Math.PI*52; let shown=0,target=0,raf=0;
+function draw(){$('rg').style.strokeDashoffset=C*(1-shown/100);$('pc').textContent=Math.round(shown)+'%'}
+function tick(){shown+=(target-shown)*.14;if(Math.abs(target-shown)<.4)shown=target;draw();raf=shown!==target?requestAnimationFrame(tick):0}
+function pct(p){target=Math.min(100,p);if(!raf)raf=requestAnimationFrame(tick)}
+function lo(on,txt){if(txt)$('lt').textContent=txt;if(on){shown=target=0;draw()}$('ld').classList.toggle('show',!!on)}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3800)}
+
+// ====== RENDER ======
+function opt(f,x,d,on){
+ const ch=f.ty==='chk';
+ return `<label class="opt ${ch?'chk':''} ${on?'on':''}"><input type="${ch?'checkbox':'radio'}" name="${f.k}" value="${esc(x)}" ${on?'checked':''}><span class="bx"></span><span><b>${esc(x)}</b>${d?`<small>${esc(d)}</small>`:''}</span></label>`;
+}
+function field(f,k,v){
+ if(f.ty==='area')return `<textarea data-k="${k}" rows="3" placeholder="${esc(f.ph)}">${esc(v)}</textarea>`;
+ if(f.ty==='sg')return `<div class="sg"><input type="text" data-k="${k}" data-sg="1" placeholder="${esc(f.ph)}" value="${esc(v)}"><ul></ul></div>`;
+ const ty=f.ty==='num'?'text':f.ty, im=f.ty==='num'?' inputmode="numeric"':f.ty==='tel'?' inputmode="tel"':'';
+ return `<input type="${ty}"${im} data-k="${k}" placeholder="${esc(f.ph)}" value="${esc(v)}">`;
+}
+function q(f,i){
+ const v=D[f.k]; let h=`<div class="q" data-q="${f.k}" style="--i:${i}"><span class="l ${f.req?'req':''}">${esc(f.l)}</span>`;
+ if(f.o){
+  const on=x=>f.ty==='chk'?(v||[]).includes(x):v===x;
+  h+=f.o.map(([x,d])=>opt(f,x,d,on(x))).join('');
+  if(f.oth)h+=opt(f,OTH,'',on(OTH))+`<div class="sub" data-for="${f.k}" data-when="${OTH}"><input type="text" data-k="${f.k}_o" placeholder="Tuliskan di sini" value="${esc(D[f.k+'_o'])}"></div>`;
+  if(f.sub)h+=`<div class="sub" data-for="${f.k}" data-when="${esc(f.sub.when)}"><span class="l ${f.sub.req?'req':''}">${esc(f.sub.l)}</span>${field(f.sub,f.sub.k,D[f.sub.k])}</div>`;
+ }else h+=field(f,f.k,v);
+ if(f.h)h+=`<div class="hint">${esc(f.h)}</div>`;
+ return h+`<div class="msg"></div></div>`;
+}
+function subs(){document.querySelectorAll('.sub').forEach(s=>{const v=D[s.dataset.for],w=s.dataset.when;s.classList.toggle('show',Array.isArray(v)?v.includes(w):v===w)})}
+function render(dir){
+ const fm=$('form'); fm.className='pane'; void fm.offsetWidth;
+ fm.className='pane '+(dir<0?'inL':'inR');
+ fm.innerHTML=S[step].f.map(q).join(''); subs();
+ $('tabs').innerHTML=S.map((s,i)=>`<div class="tb ${i===step?'on':''} ${i<step?'done':''}"><b>${i<step?'✓':i+1}</b><span>${s.t}</span></div>`).join('');
+ $('fill').style.width=((step+1)/S.length*100)+'%';
+ $('stl').textContent=S[step].t; $('stp').textContent=`Langkah ${step+1} dari ${S.length}`;
+ $('prev').hidden=step===0; $('next').textContent=step===S.length-1?'Kirim Survei':'Selanjutnya';
+ window.scrollTo({top:document.querySelector('.card').offsetTop-12,behavior:'smooth'});
+}
+
+// ====== PENYIMPANAN OTOMATIS ======
+function save(){try{localStorage.setItem(KEY,JSON.stringify({D,step}));const s=$('saved');s.classList.add('on');clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1400)}catch(e){}}
+function restore(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&r.D){D=r.D;step=Math.min(r.step|0,S.length-1);if(Object.keys(D).length)setTimeout(()=>toast('Isian sebelumnya dipulihkan ✓'),900)}}catch(e){}}
+addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+
+// ====== SARAN NAMA LPK ======
+function sug(i){
+ const t=i.value.trim().toLowerCase(),ul=i.nextElementSibling;
+ if(!t||!L.length){ul.style.display='';return}
+ const m=L.filter(n=>n.toLowerCase().includes(t)).sort((a,b)=>a.toLowerCase().indexOf(t)-b.toLowerCase().indexOf(t)).slice(0,8);
+ ul.innerHTML=m.map(n=>`<li data-v="${esc(n)}">${esc(n)}</li>`).join('');ul.style.display=m.length?'block':'';
+}
+const fm=$('form');
+fm.addEventListener('input',e=>{
+ const i=e.target,k=i.dataset.k;if(!k)return;
+ if(k==='total25')i.value=i.value.replace(/\D/g,'');
+ D[k]=i.value;
+ if(i.dataset.sg)sug(i);
+ const qq=i.closest('.q');if(qq)qq.classList.remove('err');save();
+});
+fm.addEventListener('change',e=>{
+ const i=e.target;if(i.type!=='radio'&&i.type!=='checkbox')return;
+ const k=i.name;
+ if(i.type==='radio')D[k]=i.value;else{const a=D[k]||[];D[k]=i.checked?[...a,i.value]:a.filter(x=>x!==i.value)}
+ fm.querySelectorAll(`input[name="${k}"]`).forEach(x=>x.closest('.opt').classList.toggle('on',x.checked));
+ i.closest('.q').classList.remove('err');subs();save();
+});
+fm.addEventListener('pointerdown',e=>{
+ const li=e.target.closest('.sg li');if(!li)return;
+ e.preventDefault();const i=li.closest('.sg').firstElementChild;
+ i.value=li.dataset.v;D[i.dataset.k]=i.value;li.parentNode.style.display='';
+ i.closest('.q').classList.remove('err');save();
+});
+fm.addEventListener('focusout',e=>{if(e.target.dataset&&e.target.dataset.sg)setTimeout(()=>{e.target.nextElementSibling.style.display=''},150)});
+
+// ====== VALIDASI ======
+const blank=v=>!String(v??'').trim();
+function val(i){
+ let first=null;
+ S[i].f.forEach(f=>{
+  const v=D[f.k],multi=f.ty==='chk';let bad='';
+  if(f.req){
+   if(multi?!(v&&v.length):blank(v))bad='Bagian ini wajib diisi.';
+   else if(f.oth&&(multi?v.includes(OTH):v===OTH)&&blank(D[f.k+'_o']))bad='Mohon tuliskan pilihan "Lainnya".';
+   else if(f.k==='email'&&!/^\S+@\S+\.\S+$/.test(v.trim()))bad='Format email belum benar.';
+   else if(f.k==='wa'&&!/^\+?[0-9\s-]{8,16}$/.test(v.trim()))bad='Nomor WhatsApp belum benar (8–16 angka).';
+   else if(f.sub&&f.sub.req&&v===f.sub.when&&blank(D[f.sub.k]))bad='Mohon isi kolom di bawah pilihan ini.';
+  }
+  const el=fm.querySelector(`[data-q="${f.k}"]`);
+  if(el){el.classList.toggle('err',!!bad);el.querySelector('.msg').textContent=bad;if(bad&&!first)first=el}
+ });
+ if(first){first.scrollIntoView({behavior:'smooth',block:'center'});document.querySelector('.card').classList.remove('shake');void document.querySelector('.card').offsetWidth;document.querySelector('.card').classList.add('shake');if(navigator.vibrate)navigator.vibrate(60)}
+ return !first;
+}
+
+// ====== NAVIGASI & KIRIM ======
+$('next').onclick=()=>{
+ if(!val(step))return;
+ if(step<S.length-1){step++;save();render(1)}else send();
+};
+$('prev').onclick=()=>{if(step>0){step--;save();render(-1)}};
+
+function flat(f){
+ const v=D[f.k],fx=x=>x===OTH?'Lainnya: '+(D[f.k+'_o']||''):x;
+ return f.ty==='chk'?(v||[]).map(fx).join('; '):f.o?fx(v||''):String(v||'').trim();
+}
+function payload(){
+ const o={};
+ S.forEach(s=>s.f.forEach(f=>{o[f.k]=flat(f);if(f.sub)o[f.sub.k]=D[f.k]===f.sub.when?String(D[f.sub.k]||'').trim():''}));
+ return o;
+}
+async function send(){
+ if(busy)return;
+ if(!/^https:\/\//.test(API)){toast('URL Apps Script belum diisi pada file index.html.');return}
+ busy=1;lo(1,'Mengirim survei…');
+ let p=6;pct(p);const iv=setInterval(()=>{p+=(88-p)*.07;pct(p)},180);
+ try{
+  const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload())});
+  const j=await r.json();if(!j.ok)throw new Error(j.error||'Gagal menyimpan');
+  clearInterval(iv);pct(100);lt('Selesai!');await sleep(900);
+  try{localStorage.removeItem(KEY)}catch(e){}
+  lo(0);$('thx').classList.add('show');
+ }catch(e){clearInterval(iv);lo(0);busy=0;toast('Pengiriman gagal. Data Anda aman tersimpan, silakan coba lagi.')}
+}
+function lt(t){$('lt').textContent=t}
+$('done').onclick=()=>location.reload();
+
+// ====== MUAT DAFTAR LPK DARI EXCEL ======
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+async function boot(){
+ pct(6);
+ try{
+  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');pct(35);lt('Memuat daftar LPK…');
+  const r=await fetch(XLSX_FILE);if(!r.ok)throw 0;pct(60);
+  const b=await r.arrayBuffer();pct(78);
+  const wb=XLSX.read(b,{type:'array',sheets:'Direktori'});
+  const rows=XLSX.utils.sheet_to_json(wb.Sheets['Direktori'],{header:1});
+  const h=rows.findIndex(r=>String(r[0]||'').trim().toLowerCase()==='nama lembaga');
+  L=[...new Set(rows.slice(h+1).map(r=>String(r[0]||'').trim()).filter(Boolean))];
+ }catch(e){console.warn('Daftar LPK tidak termuat; input manual tetap bisa dipakai.',e)}
+ pct(100);restore();render(1);await sleep(600);lo(0);
+}
+boot();
+</script>
+</body>
+</html>
