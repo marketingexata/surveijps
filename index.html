@@ -182,7 +182,7 @@ const S=[
 
 const $=id=>document.getElementById(id), sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let D={}, step=0, L=[], busy=0;
+let D={}, step=0, L=[], busy=0, sent=0;
 
 // ====== LOADER (lingkaran + persentase) ======
 const C=2*Math.PI*52; let shown=0,target=0,raf=0;
@@ -227,7 +227,7 @@ function render(dir){
 }
 
 // ====== PENYIMPANAN OTOMATIS ======
-function save(){try{localStorage.setItem(KEY,JSON.stringify({D,step}));const s=$('saved');s.classList.add('on');clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1400)}catch(e){}}
+function save(){if(sent)return;try{localStorage.setItem(KEY,JSON.stringify({D,step}));const s=$('saved');s.classList.add('on');clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1400)}catch(e){}}
 function restore(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&r.D){D=r.D;step=Math.min(r.step|0,S.length-1);if(Object.keys(D).length)setTimeout(()=>toast('Isian sebelumnya dipulihkan ✓'),900)}}catch(e){}}
 addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
 
@@ -306,12 +306,13 @@ async function send(){
   const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload())});
   const j=await r.json();if(!j.ok)throw new Error(j.error||'Gagal menyimpan');
   clearInterval(iv);pct(100);lt('Selesai!');await sleep(900);
-  try{localStorage.removeItem(KEY)}catch(e){}
+  sent=1;try{localStorage.removeItem(KEY)}catch(e){}
+  D={};step=0;render(1);window.scrollTo(0,0);
   lo(0);$('thx').classList.add('show');
  }catch(e){clearInterval(iv);lo(0);busy=0;toast('Pengiriman gagal. Data Anda aman tersimpan, silakan coba lagi.')}
 }
 function lt(t){$('lt').textContent=t}
-$('done').onclick=()=>location.reload();
+$('done').onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
 
 // ====== MUAT DAFTAR LPK DARI EXCEL ======
 function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
